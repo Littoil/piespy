@@ -46,6 +46,7 @@ public class Configuration implements java.io.Serializable {
     public String password;
     
     public HashSet ignoreSet;
+    public HashSet relaySet;
     
     public double temporalDecayAmount;
     public int springEmbedderIterations;
@@ -90,6 +91,7 @@ public class Configuration implements java.io.Serializable {
         password = getString("Password");
         
         ignoreSet = getSet("IgnoreSet");
+	relaySet = getSet("RelaySet");
         
         temporalDecayAmount = getDouble("TemporalDecayAmount");
         springEmbedderIterations = getInt("SpringEmbedderIterations");
