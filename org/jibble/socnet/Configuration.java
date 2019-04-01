@@ -93,7 +93,7 @@ public class Configuration implements java.io.Serializable {
         
         ignoreSet = getSet("IgnoreSet");
 	relaySet = getArrayList("RelaySet");
-	relayDelim = getArrayList("RelayRelim");
+	relayDelim = getArrayList("RelayDelim");
         
         temporalDecayAmount = getDouble("TemporalDecayAmount");
         springEmbedderIterations = getInt("SpringEmbedderIterations");
