@@ -16,7 +16,7 @@ $Id: SocialNetworkBot.java,v 1.34 2004/05/11 17:07:37 pjm2 Exp $
 
 package org.jibble.socnet;
 
-import org.jibble.pircbot.*;
+import org.jibble.PircBot.*;
 
 import java.util.*;
 import java.awt.image.BufferedImage;
@@ -46,6 +46,10 @@ public class SocialNetworkBot extends PircBot {
         if (config.ignoreSet.contains(sender.toLowerCase())) {
             return;
         }
+	if (config.relaySet.contains(sender.toLowerCase()))
+	{
+		// code	
+	}
         
         add(channel, sender);
         
@@ -212,6 +216,11 @@ public class SocialNetworkBot extends PircBot {
         if (config.ignoreSet.contains(nick.toLowerCase())) {
             return;
         }
+
+	if (config.relaySet.contains(nick.toLowerCase()))
+	{
+		//code
+	}
 
         Node node = new Node(nick);
         String key = channel.toLowerCase();

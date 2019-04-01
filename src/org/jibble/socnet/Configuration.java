@@ -46,7 +46,8 @@ public class Configuration implements java.io.Serializable {
     public String password;
     
     public HashSet ignoreSet;
-    public HashSet relaySet;
+    public ArrayList relaySet;
+    public ArrayList relayDelim;
     
     public double temporalDecayAmount;
     public int springEmbedderIterations;
@@ -91,7 +92,8 @@ public class Configuration implements java.io.Serializable {
         password = getString("Password");
         
         ignoreSet = getSet("IgnoreSet");
-	relaySet = getSet("RelaySet");
+	relaySet = getArrayList("RelaySet");
+	relayDelim = getArrayList("RelayRelim");
         
         temporalDecayAmount = getDouble("TemporalDecayAmount");
         springEmbedderIterations = getInt("SpringEmbedderIterations");
@@ -151,6 +153,18 @@ public class Configuration implements java.io.Serializable {
             throw new NoSuchElementException("Config did not contain: " + label);
         }
         return value;
+    }
+
+    public ArrayList getArrayList(String label)
+    {
+	    String values = getString(label);
+	    String[] items = values.split(",");
+	    ArrayList<String> arraylist = new ArrayList<String>();
+	    for (int i = 0; i < items.length; i++)
+	    {
+		    arraylist.add(items[i]);
+	    }
+	    return arraylist;
     }
     
     
