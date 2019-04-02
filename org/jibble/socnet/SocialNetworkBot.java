@@ -19,6 +19,7 @@ package org.jibble.socnet;
 import org.jibble.pircbot.*;
 
 import java.util.*;
+import java.util.regex.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
@@ -28,7 +29,7 @@ import java.io.*;
  */
 public class SocialNetworkBot extends PircBot {
 
-    public static final String VERSION = "PieSpy 0.4.0";
+    public static final String VERSION = "PieSpy 0.4.1";
 
     public SocialNetworkBot(Configuration config) throws IOException {
         this.config = config;
@@ -46,6 +47,30 @@ public class SocialNetworkBot extends PircBot {
         if (config.ignoreSet.contains(sender.toLowerCase())) {
             return;
         }
+
+	for (int i = 0;i < config.relaySet.size();i++)
+	{
+		if (config.relaySet.get(i).toString().toLowerCase() == sender.toLowerCase())
+		{
+			String pattern = config.relayDelim.get(i).toString();
+			pattern = pattern.replace("(","\\(");
+			pattern = pattern.replace(")","\\)");
+			pattern = pattern.replaceAll("\\s","\\\\s");
+			pattern = pattern.replace("*","(.*)");
+			Pattern pat = Pattern.compile(pattern+"(.*)");
+			Matcher match = pat.matcher(message);
+
+			if (match.find())
+			{
+				sender = match.group(1).toString();
+				message = match.group(2).toString();
+			}
+			else
+			{
+				return;
+			}
+		}
+	}
         
         add(channel, sender);
         
