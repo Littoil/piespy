@@ -48,25 +48,37 @@ public class SocialNetworkBot extends PircBot {
             return;
         }
 
+
+	System.out.println("Username: "+sender);
+	System.out.println("Message: "+message);
+	System.out.println("relaySet: "+config.relaySet.toString());
+	System.out.println("Delims: "+config.relayDelim.toString());
+
 	for (int i = 0;i < config.relaySet.size();i++)
 	{
-		if (config.relaySet.get(i).toString().toLowerCase() == sender.toLowerCase())
+		System.out.println("Loop: " + config.relaySet.get(i).toString().toLowerCase()+" == " + sender.toLowerCase());
+		if (Objects.equals(config.relaySet.get(i).toString().toLowerCase(),sender.toLowerCase()))
 		{
+			System.out.println("Found match for " + sender + " in " + config.relaySet.get(i));
 			String pattern = config.relayDelim.get(i).toString();
 			pattern = pattern.replace("(","\\(");
 			pattern = pattern.replace(")","\\)");
 			pattern = pattern.replaceAll("\\s","\\\\s");
 			pattern = pattern.replace("*","(.*)");
+			System.out.println("Pattern: " + pattern);
 			Pattern pat = Pattern.compile(pattern+"(.*)");
 			Matcher match = pat.matcher(message);
 
 			if (match.find())
 			{
+				System.out.println("Found match");
 				sender = match.group(1).toString();
 				message = match.group(2).toString();
+				System.out.println(sender + ": " + message);
 			}
 			else
 			{
+				System.out.println("NOT A MESSAGE");
 				return;
 			}
 		}
@@ -237,6 +249,7 @@ public class SocialNetworkBot extends PircBot {
         if (config.ignoreSet.contains(nick.toLowerCase())) {
             return;
         }
+	System.out.println("USER used: " + nick);
 
         Node node = new Node(nick);
         String key = channel.toLowerCase();
