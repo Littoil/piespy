@@ -74,7 +74,7 @@ public class SocialNetworkBot extends PircBot {
 				System.out.println("[DEBUG] Found match");
 				sender = match.group(1).toString();
 				message = match.group(2).toString();
-				System.out.println(sender + ": " + message);
+				System.out.println("[DEBUG] " + sender + ": " + message);
 			}
 			else
 			{
@@ -349,7 +349,7 @@ public class SocialNetworkBot extends PircBot {
     private HashMap _graphs = new HashMap();
 
     // Used to remember which channels we should be in
-    private HashSet _channelSet = nw HashSet();
+    private HashSet _channelSet = new HashSet();
 
     private Configuration config;
     
