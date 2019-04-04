@@ -13,6 +13,13 @@ image to the output directory each time
 the network changes. Each image is numbered
 to assist with the generation of animations.
 
+to run this fork, you must first preform this:
+
+if on bash:
+"javac -cp ./lib/pircbot.jar ./org/jibble/socnet/*.java"
+else if on the command promt:
+"javac -classpath .;./lib/pircbot.jar ./org/jibble/socnet/*.java"
+
 The bot will try to reconnect and rejoin
 channels if it becomes disconnected from the
 server.
