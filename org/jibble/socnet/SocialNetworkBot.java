@@ -49,36 +49,36 @@ public class SocialNetworkBot extends PircBot {
         }
 
 
-	System.out.println("Username: "+sender);
-	System.out.println("Message: "+message);
-	System.out.println("relaySet: "+config.relaySet.toString());
-	System.out.println("Delims: "+config.relayDelim.toString());
+	System.out.println("[DEBUG] Username: "+sender);
+	System.out.println("[DEBUG] Message: "+message);
+	System.out.println("[DEBUG] relaySet: "+config.relaySet.toString());
+	System.out.println("[DEBUG] relayDelim: "+config.relayDelim.toString());
 
 	for (int i = 0;i < config.relaySet.size();i++)
 	{
-		System.out.println("Loop: " + config.relaySet.get(i).toString().toLowerCase()+" == " + sender.toLowerCase());
+		System.out.println("[DEBUG] Loop: " + config.relaySet.get(i).toString().toLowerCase()+" == " + sender.toLowerCase());
 		if (Objects.equals(config.relaySet.get(i).toString().toLowerCase(),sender.toLowerCase()))
 		{
-			System.out.println("Found match for " + sender + " in " + config.relaySet.get(i));
+			System.out.println("[DEBUG] Found match for " + sender + " in " + config.relaySet.get(i));
 			String pattern = config.relayDelim.get(i).toString();
 			pattern = pattern.replace("(","\\(");
 			pattern = pattern.replace(")","\\)");
 			pattern = pattern.replaceAll("\\s","\\\\s");
 			pattern = pattern.replace("*","(.*)");
-			System.out.println("Pattern: " + pattern);
+			System.out.println("[DEBUG] Pattern: " + pattern);
 			Pattern pat = Pattern.compile(pattern+"(.*)");
 			Matcher match = pat.matcher(message);
 
 			if (match.find())
 			{
-				System.out.println("Found match");
+				System.out.println("[DEBUG] Found match");
 				sender = match.group(1).toString();
 				message = match.group(2).toString();
 				System.out.println(sender + ": " + message);
 			}
 			else
 			{
-				System.out.println("NOT A MESSAGE");
+				System.out.println("[DEBUG] NOT A MESSAGE");
 				return;
 			}
 		}
@@ -249,7 +249,7 @@ public class SocialNetworkBot extends PircBot {
         if (config.ignoreSet.contains(nick.toLowerCase())) {
             return;
         }
-	System.out.println("USER used: " + nick);
+	System.out.println("[DEBUG] USER used: " + nick);
 
         Node node = new Node(nick);
         String key = channel.toLowerCase();
@@ -349,7 +349,7 @@ public class SocialNetworkBot extends PircBot {
     private HashMap _graphs = new HashMap();
 
     // Used to remember which channels we should be in
-    private HashSet _channelSet = new HashSet();
+    private HashSet _channelSet = nw HashSet();
 
     private Configuration config;
     
