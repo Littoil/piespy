@@ -73,6 +73,8 @@ public class SocialNetworkBot extends PircBot {
 			String pattern = config.relayDelim.get(i).toString();
 			pattern = pattern.replace("(","\\(");
 			pattern = pattern.replace(")","\\)");
+			pattern = pattern.replace("[","\\[");
+			pattern = pattern.replace("]","\\]");
 			pattern = pattern.replaceAll("\\s","\\\\s");
 			pattern = pattern.replace("*","(.*)");
 
