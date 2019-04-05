@@ -48,37 +48,64 @@ public class SocialNetworkBot extends PircBot {
             return;
         }
 
-
-	System.out.println("[DEBUG] Username: "+sender);
-	System.out.println("[DEBUG] Message: "+message);
-	System.out.println("[DEBUG] relaySet: "+config.relaySet.toString());
-	System.out.println("[DEBUG] relayDelim: "+config.relayDelim.toString());
+	if (config.isDebug == true)
+	{
+		System.out.println("[DEBUG] Username: "+sender);
+		System.out.println("[DEBUG] Message: "+message);
+		System.out.println("[DEBUG] relaySet: "+config.relaySet.toString());
+		System.out.println("[DEBUG] relayDelim: "+config.relayDelim.toString());
+	}
 
 	for (int i = 0;i < config.relaySet.size();i++)
 	{
-		System.out.println("[DEBUG] Loop: " + config.relaySet.get(i).toString().toLowerCase()+" == " + sender.toLowerCase());
+		if (config.isDebug == true)
+		{
+			System.out.println("[DEBUG] Loop: " + config.relaySet.get(i).toString().toLowerCase()+" ?= " + sender.toLowerCase());
+		}
+
 		if (Objects.equals(config.relaySet.get(i).toString().toLowerCase(),sender.toLowerCase()))
 		{
-			System.out.println("[DEBUG] Found match for " + sender + " in " + config.relaySet.get(i));
+			if (config.isDebug == true)
+			{
+				System.out.println("[DEBUG] Found match for " + sender + " as " + config.relaySet.get(i));
+			}
+
 			String pattern = config.relayDelim.get(i).toString();
 			pattern = pattern.replace("(","\\(");
 			pattern = pattern.replace(")","\\)");
+			pattern = pattern.replace("[","\\[");
+			pattern = pattern.replace("]","\\]");
 			pattern = pattern.replaceAll("\\s","\\\\s");
 			pattern = pattern.replace("*","(.*)");
-			System.out.println("[DEBUG] Pattern: " + pattern);
+
+			if (config.isDebug == true)
+			{
+				System.out.println("[DEBUG] Pattern: " + pattern);
+			}
+
 			Pattern pat = Pattern.compile(pattern+"(.*)");
 			Matcher match = pat.matcher(message);
 
 			if (match.find())
 			{
-				System.out.println("[DEBUG] Found match");
+				if (config.isDebug == true)
+				{
+					System.out.println("[DEBUG] Found match!");
+				}
+
 				sender = match.group(1).toString();
 				message = match.group(2).toString();
-				System.out.println("[DEBUG] " + sender + ": " + message);
+				if (config.isDebug == true)
+				{
+					System.out.println("[DEBUG] " + sender + ": " + message);
+				}
 			}
 			else
 			{
-				System.out.println("[DEBUG] NOT A MESSAGE");
+				if (config.isDebug == true)
+				{
+					System.out.println("[DEBUG] NOT A MESSAGE, IGNORING");
+				}
 				return;
 			}
 		}
@@ -249,7 +276,11 @@ public class SocialNetworkBot extends PircBot {
         if (config.ignoreSet.contains(nick.toLowerCase())) {
             return;
         }
-	System.out.println("[DEBUG] USER used: " + nick);
+
+	if (config.isDebug == true)
+	{
+		System.out.println("[DEBUG] USER added: " + nick);
+	}
 
         Node node = new Node(nick);
         String key = channel.toLowerCase();

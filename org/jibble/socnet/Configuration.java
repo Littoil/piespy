@@ -49,6 +49,8 @@ public class Configuration implements java.io.Serializable {
     public ArrayList relaySet;
     public ArrayList relayDelim;
     
+    public boolean isDebug;
+
     public double temporalDecayAmount;
     public int springEmbedderIterations;
     public double k;
@@ -107,6 +109,7 @@ public class Configuration implements java.io.Serializable {
         edgeThreshold = getDouble("EdgeThreshold");
         showEdges = getBoolean("ShowEdges");
         verbose = getBoolean("Verbose");
+	isDebug = getBoolean("Debug");
         encoding = getString("Encoding");
         
     }
