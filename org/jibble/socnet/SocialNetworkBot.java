@@ -29,7 +29,7 @@ import java.io.*;
  */
 public class SocialNetworkBot extends PircBot {
 
-    public static final String VERSION = "PieSpy 0.4.1";
+    public static final String VERSION = "PieSpy 0.5.1";
 
     public SocialNetworkBot(Configuration config) throws IOException {
         this.config = config;
